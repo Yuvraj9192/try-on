@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Try on Radrasa hair</title>
+  <meta name="description" content="Upload a photo and preview Radrasa hair styles, colours and lengths on you.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Radrasa</a>
+    <span class="top-note" id="mockNote" hidden>Demo mode: no AI calls, your photo is echoed back</span>
+  </header>
+
+  <main class="layout">
+    <section class="stage-col" aria-label="Preview">
+      <div class="mirror" id="mirror">
+        <label class="drop" id="drop" for="file">
+          <input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+          <span class="drop-title">Add a photo of you</span>
+          <span class="drop-sub">Front-facing, hair visible, good light. Drag one here or tap to choose.</span>
+        </label>
+
+        <div class="compare" id="compare" hidden>
+          <img id="imgBefore" alt="Your original photo">
+          <img id="imgAfter" alt="Your photo with the selected hair">
+          <span class="tag tag-before">Your photo</span>
+          <span class="tag tag-after" id="afterTag">Preview</span>
+          <div class="bar" id="bar"><span class="knob" aria-hidden="true"></span></div>
+          <input class="slider" id="slider" type="range" min="0" max="100" value="50" aria-label="Compare before and after">
+        </div>
+
+        <div class="busy" id="busy" hidden>
+          <div class="busy-card">
+            <span class="spin" aria-hidden="true"></span>
+            <p id="busyText">Styling your preview. This can take up to a minute.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-actions">
+        <button class="ghost" id="changePhoto" type="button" hidden>Use a different photo</button>
+        <a class="ghost" id="download" download="radrasa-preview.png" hidden>Save this look</a>
+      </div>
+
+      <div class="looks" id="looks" hidden>
+        <h2>Your looks</h2>
+        <div class="looks-row" id="looksRow"></div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Choose a style">
+      <h1>See Radrasa hair on you</h1>
+      <p class="lede" id="lede">Pick a style, colour and length. We generate a preview from your photo, so you can compare before you buy.</p>
+
+      <form id="form" novalidate>
+        <fieldset class="block">
+          <legend>Style</legend>
+          <div class="styles" id="styles"></div>
+        </fieldset>
+
+        <fieldset class="block" id="colorBlock">
+          <legend>Colour <span class="picked" id="colorPicked"></span></legend>
+          <div class="swatches" id="swatches" role="radiogroup" aria-label="Colour"></div>
+        </fieldset>
+
+        <fieldset class="block" id="lengthBlock">
+          <legend>Length <span class="picked" id="lengthPicked"></span></legend>
+          <div class="lengths" id="lengths" role="radiogroup" aria-label="Length"></div>
+        </fieldset>
+
+        <label class="consent">
+          <input type="checkbox" id="consent">
+          <span id="consentText">This is a photo of me, and I'm 18 or over. I understand it is sent to Google's Gemini to make the preview and is not saved by this page.</span>
+        </label>
+
+        <div class="summary">
+          <div>
+            <div class="sum-name" id="sumName"></div>
+            <a class="sum-link" id="sumLink" href="#" target="_blank" rel="noopener">View on radrasa.com</a>
+          </div>
+          <div class="sum-price" id="sumPrice"></div>
+        </div>
+
+        <button class="go" id="go" type="submit" disabled>Preview this look</button>
+        <p class="error" id="error" role="alert" aria-live="assertive"></p>
+        <p class="fine" id="fine">AI previews are a guide, not a promise. Colour, length and texture will differ a little from the real product, and the result carries Google's invisible SynthID mark.</p>
+      </form>
+    </section>
+  </main>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
